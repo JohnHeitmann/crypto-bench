@@ -7,9 +7,6 @@ matrix:
     - env: TARGET=x86_64-apple-darwin CC=clang CXX=clang++
       os: osx
       rust: nightly
-      before_install:
-        - brew update
-        - brew install libsodium
 
     - env: TARGET=x86_64-unknown-linux-gnu CC=gcc-5 CXX=g++-5
       os: linux
@@ -21,14 +18,14 @@ matrix:
             - gcc-5
           sources:
             - ubuntu-toolchain-r-test
-      install:
-        # libsodium is not yet whitelisted for use via the TravisCI apt addon, so we install it manually
-        - wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz
-        - tar xvfz libsodium-1.0.10.tar.gz
-        - cd libsodium-1.0.10 && ./configure --prefix=$HOME/installed_libsodium && make && make install && cd ..
-        - export PKG_CONFIG_PATH=$HOME/installed_libsodium/lib/pkgconfig:$PKG_CONFIG_PATH
-        - export LD_LIBRARY_PATH=$HOME/installed_libsodium/lib:$LD_LIBRARY_PATH
 
+install:
+  # libsodium is not yet whitelisted for use via the TravisCI apt addon, so we install it manually
+  - wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz
+  - tar xvfz libsodium-1.0.10.tar.gz
+  - cd libsodium-1.0.10 && ./configure --prefix=$HOME/installed_libsodium && make && make install && cd ..
+  - export PKG_CONFIG_PATH=$HOME/installed_libsodium/lib/pkgconfig:$PKG_CONFIG_PATH
+  - export LD_LIBRARY_PATH=$HOME/installed_libsodium/lib:$LD_LIBRARY_PATH
 
 script:
   # We don't run `cargo bench` because Travis CI isn't a reliable platform for
