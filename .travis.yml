@@ -7,6 +7,9 @@ matrix:
     - env: TARGET=x86_64-apple-darwin CC=clang CXX=clang++
       os: osx
       rust: nightly
+      before_install:
+        - brew update
+        - brew install libsodium
 
     - env: TARGET=x86_64-unknown-linux-gnu CC=gcc-5 CXX=g++-5
       os: linux
