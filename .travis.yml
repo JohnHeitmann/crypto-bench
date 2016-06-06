@@ -19,7 +19,7 @@ matrix:
           packages:
             - g++-5
             - gcc-5
-            - libsodium
+            - libsodium13
           sources:
             - ubuntu-toolchain-r-test
 
