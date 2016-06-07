@@ -3,13 +3,17 @@ macro_rules! sodiumoxide_seal_in_place_bench {
         #[bench]
         fn $benchmark_name(b: &mut test::Bencher) {
             use $sealer as _sealer;
+            use sodiumoxide;
+
+            sodiumoxide::init();
+
             b.bytes = $input_len as u64;
             let key = _sealer::gen_key();
             let nonce = _sealer::gen_nonce();
             // XXX: sodiumoxide doesn't support in place encryption, so
             // we explicitly memcpy to have the same overhead as
             // other benchmarks.
-            // secretbox will add at most MACBYTES to the result length,
+            // encrypt will add at most MACBYTES to the result length,
             // so that lets us know how to build a buffer big enough
             // for both input and output.
             let mut in_out = vec![0u8; $input_len + _sealer::MACBYTES];
