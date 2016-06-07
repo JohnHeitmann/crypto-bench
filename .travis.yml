@@ -20,7 +20,8 @@ matrix:
             - ubuntu-toolchain-r-test
 
 install:
-  # libsodium is not yet whitelisted for use via the TravisCI apt addon, so we install it manually
+  # libsodium is not yet whitelisted for use via the TravisCI apt addon, so we
+  # install it manually
   - wget https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz
   - tar xvfz libsodium-1.0.10.tar.gz
   - cd libsodium-1.0.10 && ./configure --prefix=$HOME/installed_libsodium && make && make install && cd ..
