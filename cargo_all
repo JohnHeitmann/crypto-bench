@@ -1,8 +1,6 @@
 #!/bin/sh
 
-(cd fastpbkdf2 && cargo $*)
-(cd octavo && cargo $*)
-(cd openssl && cargo $*)
-(cd ring && cargo $*)
-(cd rust_crypto && cargo $*)
-(cd sodiumoxide && cargo $*)
+suites="fastpbkdf2 octavo openssl ring rust_crypto sodiumoxide"
+for SUITE in $suites ; do
+    (cd $SUITE && echo "Running '$*' in $SUITE" && cargo $*)
+done

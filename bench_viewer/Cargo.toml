@@ -1,0 +1,20 @@
+[package]
+description = "cargo bench results viewer tailored for crypto-bench."
+name = "bench_viewer"
+version = "0.1.0"
+
+[[bin]]
+name = "bench_viewer"
+
+[dependencies]
+regex = "*"
+lazy_static = "0.1.*"
+clap = "*"
+
+iron = "*"
+mount = "*"
+staticfile = "*"
+
+serde = "*"
+serde_json = "*"
+serde_macros = "*"
